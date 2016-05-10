@@ -327,8 +327,11 @@ public class OshiPlatformCache {
      * @param metricToCollect the metric to collect
      * @return the value of the metric, or null if there is no resource identified by the node
      */
-    public Double getMetric(PlatformResourceNode node, Name metricToCollect) {
+    public Object getMetric(PlatformResourceNode node, Name metricToCollect) {
         switch (node.getType()) {
+            case OPERATING_SYSTEM: {
+                return getOperatingSystemMetric(metricToCollect);
+            }
             case MEMORY: {
                 return getMemoryMetric(metricToCollect);
             }
@@ -344,6 +347,18 @@ public class OshiPlatformCache {
             default: {
                 throw new IllegalArgumentException("Platform resource node [" + node + "] does not have metrics");
             }
+        }
+    }
+
+    /**
+     * @param metricToCollect
+     * @return
+     */
+    public Object getOperatingSystemMetric(Name metricToCollect) {
+        if (Constants.MACHINE_ID.equals(metricToCollect)) {
+            return machineId;
+        } else {
+            throw new UnsupportedOperationException("Invalid memory metric to collect: " + metricToCollect);
         }
     }
 

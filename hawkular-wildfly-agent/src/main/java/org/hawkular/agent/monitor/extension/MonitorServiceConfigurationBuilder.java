@@ -463,6 +463,15 @@ public class MonitorServiceConfigurationBuilder {
                 .location(new PlatformNodeLocation(
                         PlatformPath.builder().any(PlatformResourceType.OPERATING_SYSTEM).build()))
                 .resourceNameTemplate("%s");
+
+        ResourceConfigurationPropertyType<PlatformNodeLocation> machineIdConfigType = //
+                new ResourceConfigurationPropertyType<PlatformNodeLocation>(
+                        ID.NULL_ID, Constants.MACHINE_ID,
+                        new AttributeLocation<PlatformNodeLocation>(
+                                new PlatformNodeLocation(PlatformPath.empty()), Constants.MACHINE_ID.getNameString())
+                        );
+        rootTypeBldr.resourceConfigurationPropertyType(machineIdConfigType);
+
         populateMetricAndAvailTypesForResourceType(rootTypeBldr, typeSetsBuilder);
         ResourceType<PlatformNodeLocation> rootType = rootTypeBldr.build();
 

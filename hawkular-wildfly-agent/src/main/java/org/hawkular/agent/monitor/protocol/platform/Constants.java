@@ -67,6 +67,7 @@ public interface Constants {
     }
 
     Name PLATFORM = new Name("Platform");
+    Name MACHINE_ID = new Name("machineId");
 
     // names of all known metrics of all known platform resource types
 
